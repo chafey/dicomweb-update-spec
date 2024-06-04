@@ -54,3 +54,17 @@ Proposal for a set of APIs to support updating of DICOM instances via DICOMweb
   - Body may include any study level attributes to update (new study will inherit old study attributes by default)
   - Body may include any series level attributes to update (new series will inherit old series attributes by default)
  
+## Delete APIs
+
+- Delete Patient - DELETE to /patients/[id]
+  - Deletes all instances with the PatientId
+
+- Delete Study - DELETE to /studies/[id]
+  - Deletes all instance for the specified study
+
+- Delete Series - DELETE to /studies/[id]/series/[id]
+  - Deletes all instance for the specified series.  
+
+- Delete Instance - DELETE to /studies/[id]/series/[id]/instances/[id]
+  - Deletes the specified instance
+ 
