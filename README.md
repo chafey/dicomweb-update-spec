@@ -22,7 +22,7 @@ Proposal for a set of APIs to support updating of DICOM instances via DICOMweb
   - SeriesUID can be changed
   - StudyUID can be changed to another existing Study
     - Existing patient/study attributes will be applied to all instances in this series
-    - If existing patient or study does not exist, call will fail
+    - If existing study does not exist, call will fail
 
 - Update SOP Instance Attribute - PUT to /studies/[id]/series/[id]/instances/[id]/metadata
   - Body is a DICOM dataset of attributes to change/add/remove
@@ -31,7 +31,7 @@ Proposal for a set of APIs to support updating of DICOM instances via DICOMweb
   - SeriesUID can be changed to another existing Series.
     - Must include StudyUID as well
     - Existing patient/study/series attributes will be applied to instance
-    - If existing patient, study or series does not exist, call will fail
+    - If existing study or series does not exist, call will fail
 
 - Move Study to a new Patient - POST to /studies/[id]
   - Body is a DICOM dataset of attributes 

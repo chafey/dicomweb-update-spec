@@ -41,6 +41,26 @@ describe('Update Series', function () {
       // assert
       //assert.notEqual(result, undefined);
     });
+    it('should move the series to another study', async function () {
+      // arrange
+      const studyUid = "1.2.3.4.5";
+      const seriesUid = "1.2.3.4.5.6";
+      const newStudyUid = "2.3.4.5";
+      const body = {
+          "0020000D" : {
+              "vr": "UI",
+              "Value": newStudyUid
+          },
+      }
+
+      //act
+      const old = await http.get(`studies/${studyUid}/series/${seriesUid}`)
+      const result = await http.put(`studies/${studyUid}/series/${seriesUid}`, body)
+      const current = await http.get(`studies/${studyUid}/series/${seriesUid}`)
+
+      // assert
+      //assert.notEqual(result, undefined);
+    });
   });
   describe('failure scenarios', function () {
     it('update to non existant study should fail', async function () {
@@ -76,6 +96,25 @@ describe('Update Series', function () {
         //assert
         //assert.notEqual(result, undefined);
       }));
+    });
+    it('should throw moving to non existent study', async function () {
+      // arrange
+      const studyUid = "1.2.3.4.5";
+      const seriesUid = "1.2.3.4.5.6";
+      const newStudyUid = "1.1.1.1.1.1.1.1.";
+      const body = {
+          "0020000D" : {
+              "vr": "UI",
+              "Value": newStudyUid
+          },
+      }
+
+      //act
+      const old = await http.get(`studies/${studyUid}/series/${seriesUid}`)
+      const result = await http.putThrows(`studies/${studyUid}/series/${seriesUid}`, body)
+
+      // assert
+      //assert.notEqual(result, undefined);
     });
   });
 });
