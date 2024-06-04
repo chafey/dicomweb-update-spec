@@ -32,8 +32,8 @@ describe('Update Study', function () {
       }
 
       //act
-      const old = await http.get(`patients/${studyUid}`)
-      const result = await http.put(`patients/${studyUid}`, body)
+      const old = await http.get(`studies/${studyUid}`)
+      const result = await http.put(`studies/${studyUid}`, body)
       const current = await http.get(`studies/${studyUid}`)
 
       // assert
