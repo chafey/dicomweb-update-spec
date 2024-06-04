@@ -1,0 +1,16 @@
+{
+  "name": "dicomweb-update-spec",
+  "version": "1.0.0",
+  "description": "Proposal for a set of APIs to support updating of DICOM instances via DICOMweb",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "testwatch": "mocha -w"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^10.4.0"
+  }
+}
