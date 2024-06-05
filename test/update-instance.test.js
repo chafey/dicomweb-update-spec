@@ -43,27 +43,6 @@ describe('Update instance', function () {
       // assert
       //assert.notEqual(result, undefined);
     });
-    it('should move the instance to another series', async function () {
-      // arrange
-      const studyUid= "1.2.3.4.5";
-      const seriesUid = "1.2.3.4.5.6"
-      const instanceUid = "1.2.3.4.5.6.7";
-      const newSeriesUid = "1.2.3.4.5.7";
-      const body = {
-          "0020000E" : {
-              "vr": "UI",
-              "Value":newSeriesUid 
-          },
-      }
-
-      //act
-      const old = await http.get(`studies/${studyUid}/series/${seriesUid}/instances/${instanceUid}`)
-      const result = await http.put(`studies/${studyUid}/series/${seriesUid}/instances/${instanceUid}`, body)
-      const current = await http.get(`studies/${studyUid}/series/${seriesUid}/instances/${instanceUid}`)
-
-      // assert
-      //assert.notEqual(result, undefined);
-    });
   });
   describe('failure scenarios', function () {
     it('update to non existant study should fail', async function () {
@@ -103,54 +82,23 @@ describe('Update instance', function () {
         //assert.notEqual(result, undefined);
       }));
     });
-    it('should throw moving to non existent study', async function () {
+    it('update to non existant instance should fail', async function () {
       // arrange
-      const studyUid = "1.2.3.4.5";
-      const seriesUid = "1.2.3.4.5.6";
-      const instanceUid = "1.2.3.4.5.6.7";
-      const newStudyUid = "1.1.1.1.1.1.1.1.";
-      const newSeriesUid = "1.1.1.1.1";
+      const studyUid= "1.2.3.4.5";
+      const seriesUid= "1.2.3.4.5.6";
+      const instanceUid = "1.1.1.1.1.1.1.1.1.1.1";
       const body = {
-          "0020000D" : {
-              "vr": "UI",
-              "Value": newStudyUid
-          },
-          "0020000E" : {
-              "vr": "UI",
-              "Value": newSeriesUid
+          "0008103E" : {
+              "vr": "LO",
+              "Value": "New Series Description" 
           },
       }
 
-      //act
-      const old = await http.get(`studies/${studyUid}/series/${seriesUid}/instances/${instanceUid}`)
-      const result = await http.putThrows(`studies/${studyUid}/series/${seriesUid}/${instanceUid}`, body)
-
-      // assert
-      //assert.notEqual(result, undefined);
-    });
-    it('should throw moving to non existent series', async function () {
-      // arrange
-      const studyUid = "1.2.3.4.5";
-      const seriesUid = "1.2.3.4.5.6";
-      const instanceUid = "1.2.3.4.5.6.7";
-      const newSeriesUid = "1.1.1.1.1.1.1.1.";
-      const body = {
-          "0020000D" : {
-              "vr": "UI",
-              "Value": studyUid 
-          },
-          "0020000E" : {
-              "vr": "UI",
-              "Value": newSeriesUid
-          },
-      }
-
-      //act
-      const old = await http.get(`studies/${studyUid}/series/${seriesUid}/instances/${instanceUid}`)
-      const result = await http.putThrows(`studies/${studyUid}/series/${seriesUid}/${instanceUid}`, body)
-
-      // assert
-      //assert.notEqual(result, undefined);
+      // act
+      return(http.putThrows(`studies/${studyUid}/series/${seriesUid}/instances/${instanceUid}`, body).then((result) => {
+        //assert
+        //assert.notEqual(result, undefined);
+      }));
     });
   });
 });

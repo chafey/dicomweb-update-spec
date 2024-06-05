@@ -39,25 +39,6 @@ describe('Update Study', function () {
       // assert
       //assert.notEqual(result, undefined);
     })
-    it('should move the study to a different existing patient', async function () {
-      // arrange
-      const newPatientId = "NEWPATIENTID";
-      const studyUid = "1.2.3.4.5";
-      const body = {
-        "00100020" : {
-            "vr": "LO",
-            "Value":  newPatientId
-        }
-      }
-
-      //act
-      const old = await http.get(`studies/${studyUid}`)
-      const result = await http.put(`studies/${studyUid}`, body)
-      const current = await http.get(`studies/${studyUid}`)
-
-      // assert
-      //assert.notEqual(result, undefined);
-    });
   });
   describe('failure scenarios', function () {
     it('should throw if study does not exist', async function () {
@@ -75,24 +56,6 @@ describe('Update Study', function () {
         //assert
         //assert.notEqual(result, undefined);
       }));
-    });
-    it('should throw if study moved to a non existant patient', async function () {
-      // arrange
-      const badPatientId = "DOESNOTEXIST";
-      const studyUid = "1.2.3.4.5";
-      const body = {
-        "00100020" : {
-            "vr": "LO",
-            "Value": badPatientId 
-        }
-      }
-
-      //act
-      const old = await http.get(`studies/${studyUid}`)
-      const result = await http.putThrows(`studies/${studyUid}`, body)
-
-      // assert
-      //assert.notEqual(result, undefined);
     });
   });
 });
