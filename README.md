@@ -90,12 +90,12 @@ Status: WIP (Jun 5, 2024)
 ## FAQ
 
 - Q: Why did you introduce a normalizedmetadata endpoint?
-- A: The normalized endpoints allow clients to work with small subsets of a very large dataset more easily (the existing metadata endpoints return all attributees and the payload can be very large)
+    - A: The normalized endpoints allow clients to work with small subsets of a very large dataset more easily (the existing metadata endpoints return all attributees and the payload can be very large)
 
 - Q: How would you merge two patients?  
-- A: Use Move Study to move all studies from patient A to patient B
+    - A: Use Move Study to move all studies from patient A to patient B
 
 - Q: Why do you need to provide ALL attributes when updating a resource instead of just the changes
-- A1: The DICOM JSON model does not have a way to represent a removed attribute so there would be no way to do that.
-- A2: HTTP PATCH would be more appropriate for changing a few attributes.  PUT is for updating/replacing the entire resource
+    - A1: The DICOM JSON model does not have a way to represent a removed attribute so there would be no way to do that.
+    - A2: HTTP PATCH would be more appropriate for changing a few attributes.  PUT is for updating/replacing the entire resource
 
