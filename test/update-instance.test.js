@@ -4,48 +4,41 @@ const http = require('./http')
 
 describe('Update instance', function () {
   describe('Happy Paths', function () {
-    it('should update the instance uid', async function () {
-        /*
-        // arrange
-        const studyUid= "1.2.3.4.5";
-        const seriesUid = "1.2.3.4.5.6"
-        const instanceUid = "1.2.3.4.5.6.7";
-        const newInstanceUid = "1.2.3.4.5.7";
-        const body = {
-            "00080018" : {
-                "vr": "UI",
-                "Value": newInstanceUid 
-            }
-        }
-
-        // act
-        return(http.put(`studies/${studyUid}/series/${seriesUid}/instances/${instanceUid}`, body).then((result) => {
-          //assert
-          //assert.equals(result, undefined);
-        }));
-        */
-    });
     it('should update the instance number', async function () {
-      /*
       // arrange
       const studyUid= "1.2.3.4.5";
       const seriesUid = "1.2.3.4.5.6"
       const instanceUid = "1.2.3.4.5.6.7";
-      const body = {
-          "00200013" : {
-              "vr": "IS",
-              "Value": "100" 
-          },
-      }
+      const instance = await http.get(`studies/${studyUid}/series/${seriesUid}/instances/${instanceUid}/normalizedmetadata`)
+      instance["00200013"] =  {
+        "vr": "IS",
+        "Value": "100" 
+      };
 
       //act
-      const old = await http.get(`studies/${studyUid}/series/${seriesUid}/instances/${instanceUid}`)
-      const result = await http.put(`studies/${studyUid}/series/${seriesUid}/instances/${instanceUid}`, body)
-      const current = await http.get(`studies/${studyUid}/series/${seriesUid}/instances/${instanceUid}`)
+      return http.put(`studies/${studyUid}/series/${seriesUid}/instances/${instanceUid}`, instance).then(async (result) => {
+        const instance = await http.get(`studies/${studyUid}/series/${seriesUid}/instances/${instanceUid}/normalizedmetadata`)
+        //assert
+        //assert.deepEqual(newInstance, instance);
+      })
+    });
+    it('should update the instance uid', async function () {
+      // arrange
+      const studyUid= "1.2.3.4.5";
+      const seriesUid = "1.2.3.4.5.6"
+      const instanceUid = "1.2.3.4.5.6.7";
+      const instance = await http.get(`studies/${studyUid}/series/${seriesUid}/instances/${instanceUid}/normalizedmetadata`)
+      instance["00080018"] =  {
+        "vr": "UI",
+        "Value": "1.2.3.4.5.6.8" 
+      };
 
-      // assert
-      //assert.notEqual(result, undefined);
-      */
+      //act
+      return http.put(`studies/${studyUid}/series/${seriesUid}/instances/${instanceUid}`, instance).then(async (result) => {
+        const instance = await http.get(`studies/${studyUid}/series/${seriesUid}/instances/${instanceUid}/normalizedmetadata`)
+        //assert
+        //assert.deepEqual(newInstance, instance);
+      })
     });
   });
   describe('failure scenarios', function () {
