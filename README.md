@@ -1,7 +1,7 @@
 # dicomweb-update-spec
 Proposal for a set of APIs to support updating of DICOM instances via DICOMweb
 
-Status: WIP (Jun 5, 2024)
+Status: Requesting feedback from community (Jun 6, 2024)
 
 ## Use Cases
 
@@ -14,6 +14,9 @@ Status: WIP (Jun 5, 2024)
   - merge two studies together (e.g. time delayed studies)
   - move instances from one study into another study (e.g. procedure was not completed on scanner before second patient was scanned)
 - Modernize data (e.g. remove private attribute with custom annotations and create new presentation state instance with those annotations)
+- Changing the transfer syntax of stored sop instances (transcoding)
+
+
 
 ## APIs
 ### Replace APIS
@@ -45,6 +48,7 @@ Status: WIP (Jun 5, 2024)
   - Instance level attributes are those that do not belong to the patient, study or series level attributes as defined above
   - Will cause the instances to be updated that has the same StudyInstanceUID, SeriesInstanceUid and SOPInstanceUID
   - SOPInstanceUID can be changed
+  - TransferSyntaxUID can be changed if the server supports transcoding and this instance can be transcoded to the requested transfer syntax
   - Attempting to set other level attributes (Patient/Study/Series) will generate an error 
 
 ### Update APIs
@@ -77,6 +81,7 @@ Status: WIP (Jun 5, 2024)
   - Instance level attributes are those that do not belong to the patient, study or series level attributes as defined above
   - Will cause the instance to be updated that has the same Study UID, Series UID, SOP InstanceUID 
   - SOPInstanceUID can be changed
+  - TransferSyntaxUID can be changed if the server supports transcoding and this instance can be transcoded to the requested transfer syntax
   - Attempting to set other level attributes (Patient/Study/Series) will generate an error 
 
 - Update all Study Instances - PATCH to /studies/[id]/metadata
