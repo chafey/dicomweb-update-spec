@@ -7,12 +7,12 @@ describe('Update Patient', function () {
       const patientId = "PATIENTIDTOUPDATE";
       const patient = http.get(`patients/${patientId}/normalizedmetadata`);
       // patient name
-      patient["00100010"] = {
+      patient[0]["00100010"] = {
           "vr": "PN",
           "Value": "DOE^JOHN" 
       };
       // birthdate
-      patient["00100030"] = { 
+      patient[0]["00100030"] = { 
           "vr": "DA",
           "Value": "DOE^JOHN" 
       };
@@ -30,7 +30,7 @@ describe('Update Patient', function () {
         const patientId = "PATIENTIDTOUPDATE";
         const newPatientId = "ABC123";
         const patient = http.get(`patients/${patientId}/normalizedmetadata`);
-        patient["00100020"] = {
+        patient[0]["00100020"] = {
           "vr": "LO",
            "Value": newPatientId 
         };

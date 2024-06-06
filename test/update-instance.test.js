@@ -10,7 +10,7 @@ describe('Update instance', function () {
       const seriesUid = "1.2.3.4.5.6"
       const instanceUid = "1.2.3.4.5.6.7";
       const instance = await http.get(`studies/${studyUid}/series/${seriesUid}/instances/${instanceUid}/normalizedmetadata`)
-      instance["00200013"] =  {
+      instance[0]["00200013"] =  {
         "vr": "IS",
         "Value": "100" 
       };
@@ -28,7 +28,7 @@ describe('Update instance', function () {
       const seriesUid = "1.2.3.4.5.6"
       const instanceUid = "1.2.3.4.5.6.7";
       const instance = await http.get(`studies/${studyUid}/series/${seriesUid}/instances/${instanceUid}/normalizedmetadata`)
-      instance["00080018"] =  {
+      instance[0]["00080018"] =  {
         "vr": "UI",
         "Value": "1.2.3.4.5.6.8" 
       };

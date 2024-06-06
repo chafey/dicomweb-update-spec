@@ -9,7 +9,7 @@ describe('Update Series', function () {
       const studyUid = "1.2.3.4.5";
       const seriesUid = "1.2.3.4.5.6";
       const series = await http.get(`studies/${studyUid}/series/${seriesUid}/normalizedmetadata`);
-      series["0008103E"] =  {
+      series[0]["0008103E"] =  {
         "vr": "LO",
         "Value": "New Series Description" 
       };
@@ -26,7 +26,7 @@ describe('Update Series', function () {
       const studyUid = "1.2.3.4.5";
       const seriesUid = "1.2.3.4.5.6";
       const series = await http.get(`studies/${studyUid}/series/${seriesUid}/normalizedmetadata`);
-      series["0020000E"] =  {
+      series[0]["0020000E"] =  {
         "vr": "UI",
         "Value": "1.2.3.4.5.7" 
       };

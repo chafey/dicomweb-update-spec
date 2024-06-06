@@ -6,7 +6,7 @@ describe('Update Study', function () {
       // arrange
       const studyUid = "1.2.3.4.5";
       const study = await http.get('studies/${studyUid}/normalizedmetadata')
-      study["00081030"] = {
+      study[0]["00081030"] = {
         "vr": "LO",
         "Value": "New Study Description" 
       };
@@ -23,12 +23,11 @@ describe('Update Study', function () {
         // arrange
         const studyUid= "1.2.3.4.5";
         const newStudyUid= "1.2.3.4.6";
-        const body = {
-            "00200000D" : {
-                "vr": "UI",
-                "Value": newStudyUid 
-            }
-        }
+        const study = await http.get('studies/${studyUid}/normalizedmetadata');
+        study[0]["00200000D"] = {
+          "vr": "UI",
+          "Value": newStudyUid 
+        };
 
         // act
         return(http.put(`studies/${studyUid}`, body).then((result) => {

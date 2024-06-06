@@ -8,8 +8,8 @@ describe('Move Study', function () {
       // arrange
       const studyUid = "1.2.3.4.5";
       const newPatientId = "ABC123";
-      const body = {};
-      body["00100020"] = {
+      const body = [{}];
+      body[0]["00100020"] = {
         "vr": "LO",
          "Value": newPatientId 
       };  
