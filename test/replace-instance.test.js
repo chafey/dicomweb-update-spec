@@ -2,7 +2,7 @@
 var assert = require('assert');
 const http = require('./http')
 
-describe('Update instance', function () {
+describe('Replace Instance', function () {
   describe('Happy Paths', function () {
     it('should update the instance number', async function () {
       // arrange

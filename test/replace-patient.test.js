@@ -1,11 +1,11 @@
 const http = require('./http')
 
-describe('Update Patient', function () {
+describe('Replace Patient', function () {
   describe('Happy Paths', function () {
     it('should update the patient name and date of birth', async function () {
       // arrange
       const patientId = "PATIENTIDTOUPDATE";
-      const patient = http.get(`patients/${patientId}/normalizedmetadata`);
+      const patient = await http.get(`patients/${patientId}/normalizedmetadata`);
       // patient name
       patient[0]["00100010"] = {
           "vr": "PN",
@@ -29,7 +29,7 @@ describe('Update Patient', function () {
         // arrange
         const patientId = "PATIENTIDTOUPDATE";
         const newPatientId = "ABC123";
-        const patient = http.get(`patients/${patientId}/normalizedmetadata`);
+        const patient = await http.get(`patients/${patientId}/normalizedmetadata`);
         patient[0]["00100020"] = {
           "vr": "LO",
            "Value": newPatientId 

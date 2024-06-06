@@ -1,6 +1,6 @@
 const http = require('./http')
 
-describe('Update Study', function () {
+describe('Replace Study', function () {
   describe('Happy Paths', function () {
     it('should update the study description', async () => {
       // arrange
@@ -30,7 +30,7 @@ describe('Update Study', function () {
         };
 
         // act
-        return(http.put(`studies/${studyUid}`, body).then((result) => {
+        return(http.put(`studies/${studyUid}`, study).then((result) => {
           //assert
           //assert.equals(result, undefined);
         }));

@@ -1,4 +1,10 @@
 const baseUri = "http://localhost/"
+
+const get = async (path) => {
+  return [{}];
+  return fetch(baseUri + path);
+}
+
 const post = async (path, body) => {
   return {};
   return fetch(baseUri + path, {body, method: "POST"})
@@ -16,6 +22,7 @@ const put = async (path, body) => {
   return {};
   return fetch(baseUri + path, {body, method: "PUT"})
 }
+
 const putThrows = async(path, body) => {
   try {
     const result = put(path, body);
@@ -26,16 +33,16 @@ const putThrows = async(path, body) => {
   }
 }
 
-
-const get = async (path) => {
+const patch = async (path, body) => {
   return {};
-  return fetch(baseUri + path);
+  return fetch(baseUri + path, {body, method: "PATCH"})
 }
 
 module.exports = {
+  get,
   post,
   postThrows,
   put,
   putThrows,
-  get
+  patch,
 }

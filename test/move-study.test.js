@@ -15,7 +15,7 @@ describe('Move Study', function () {
       };  
 
       //act
-      return http.post(`studies/${studyUid}/move`, study).then(async (result) => {
+      return http.post(`studies/${studyUid}/move`, body).then(async (result) => {
         const newPatient = await http.get(`patients/${newPatientId}/normalizedmetadata`);
         // assert
         // verify using QIDO?
