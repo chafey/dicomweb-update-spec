@@ -92,20 +92,20 @@ Status: Requesting feedback from community (Jun 6, 2024)
 
 ### Move APIs
 
-- Move Study to a new or existing Patient - POST to /studies/[id]
+- Move Study to a new or existing Patient - POST to /studies/[id]/move
   - Body is a DICOM dataset of attributes 
   - Body must include new PatientID
   - Body may include a new Study Instance UID
   - If patient does not exist, it will be created using attributes from the prior patient 
 
-- Move Series to a different patient and study - POST to /studies/[id]/series/[id]
+- Move Series to a different patient and study - POST to /studies/[id]/series/[id]/move
   - Body is a DICOM dataset of attributes 
   - Body must include new patient id
   - Body must include new study uid
   - Body may include a new series uid
   - If patient and study do not exist, they will be created using attributes from the prior patient/study
 
-- Move Instance to a new patient, study and series - POST to /studies/[id]/series/[id]/instances[id]
+- Move Instance to a new patient, study and series - POST to /studies/[id]/series/[id]/instances[id]/move
   - Body is a DICOM dataset of attributes 
   - Body must include new patient id
   - Body must include new study uid
