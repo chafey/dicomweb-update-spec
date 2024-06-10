@@ -5,16 +5,14 @@ describe('Patch/Update Instance', function () {
     it('should update the instance number ', async () => {
       // arrange
       const studyUid = "1.2.3.4.5";
-      const body = {
-        updatableAttributes : [
-            {
-                "00200013" : {
-                    "vr": "IS",
-                    "Value": "100" 
-                }
+      const body = [
+        {
+            "00200013" : {
+                "vr": "IS",
+                "Value": "100" 
             }
-        ]
-      };
+        }
+      ];
 
       //act
       return http.patch(`studies/${studyUid}/normalizedmetadata`, body).then(async (result) => {
@@ -23,10 +21,12 @@ describe('Patch/Update Instance', function () {
         // assert.deepEqual(newStudy, study);
       });
     });
-    it('should change the transfer syntax', async () => {});
-    it('should update the sop instance uid', async function () { });
+    it('TODO: should change the transfer syntax', async () => {});
+    it('TODO: should update the sop instance uid', async function () { });
+    it('TODO: should remove private attribute', async function () { });
+    it('TODO: should remove an item from a sequence', async function () { });
   });
   describe('failure scenarios', function () {
-    it('should throw if patient does not exist', async function () { });
+    it('TODO: should throw if patient does not exist', async function () { });
   });
 });

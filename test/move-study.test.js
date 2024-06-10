@@ -22,11 +22,11 @@ describe('Move Study', function () {
         //assert.equal(newStudy)
       });
      });
-    it('should move the study to an existing patient', async function () { });
-    it('should move the study to an existing patient and change the study instance uid', async function () { });
+    it('TODO: should move the study to an existing patient', async function () { });
+    it('TODO: should move the study to an existing patient and change the study instance uid', async function () { });
   });
   describe('failure scenarios', function () {
-    it('should throw if patient id not provided', async function () { });
-    it('should throw if study uid not provided', async function () { });
+    it('TODO: should throw if patient id not provided', async function () { });
+    it('TODO: should throw if study uid not provided', async function () { });
   });
 });

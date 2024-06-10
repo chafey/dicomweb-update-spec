@@ -40,7 +40,7 @@ describe('Replace Series', function () {
     });
   });
   describe('failure scenarios', function () {
-    it('update to non existant study should fail', async function () {
+    it('TODO: update to non existant study should fail', async function () {
       /*
       // arrange
       const studyUid = "1.1.1.1.1.1.1.1.1.1.1";

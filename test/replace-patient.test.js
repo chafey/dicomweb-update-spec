@@ -44,7 +44,7 @@ describe('Replace Patient', function () {
     });
   });
   describe('failure scenarios', function () {
-    it('update to non existant patient should fail', async function () {
+    it('TODO: update to non existant patient should fail', async function () {
       /*
       // arrange
       const patientId = "DOESNOTEXIST";

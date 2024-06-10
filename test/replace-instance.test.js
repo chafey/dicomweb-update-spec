@@ -42,7 +42,7 @@ describe('Replace Instance', function () {
     });
   });
   describe('failure scenarios', function () {
-    it('update to non existant study should fail', async function () {
+    it('TODO: update to non existant study should fail', async function () {
       /*
       // arrange
       const studyUid = "1.1.1.1.1.1.1.1.1.1.1";
@@ -81,7 +81,7 @@ describe('Replace Instance', function () {
       }));
       */
     });
-    it('update to non existant instance should fail', async function () {
+    it('TODO: update to non existant instance should fail', async function () {
       /*
       // arrange
       const studyUid= "1.2.3.4.5";

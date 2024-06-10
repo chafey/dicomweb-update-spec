@@ -37,7 +37,7 @@ describe('Replace Study', function () {
     });
   });
   describe('failure scenarios', function () {
-    it('should throw if study does not exist', async function () {
+    it('TODO: should throw if study does not exist', async function () {
       /*
       // arrange
       const studyUid = "1.1.1.1.1.1.1.1.1.1.1";

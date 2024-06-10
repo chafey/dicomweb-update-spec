@@ -5,16 +5,13 @@ describe('Patch/Update Study', function () {
     it('should update the study description', async () => {
       // arrange
       const studyUid = "1.2.3.4.5";
-      const body = {
-        updatableAttributes : [
-            {
-                "00081030" : {
-                    "vr": "LO",
-                    "Value": "New Study Description" 
-                }
-            }
-        ]
-      };
+      const body = [
+      {
+        "00081030" : {
+          "vr": "LO",
+          "Value": "New Study Description" 
+        }
+      }];
 
       //act
       return http.patch(`studies/${studyUid}/normalizedmetadata`, body).then(async (result) => {
@@ -24,9 +21,10 @@ describe('Patch/Update Study', function () {
       });
     });
 
-    it('should update the patient id', async function () { });
+    it('TODO: should update the patient id', async function () { });
+    it('TODO: should remove the Issuer of Patient ID', async function () { });
   });
   describe('failure scenarios', function () {
-    it('should throw if patient does not exist', async function () { });
+    it('TODO: should throw if patient does not exist', async function () { });
   });
 });

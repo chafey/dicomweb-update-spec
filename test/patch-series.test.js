@@ -5,16 +5,14 @@ describe('Patch/Update Series', function () {
     it('should update the series description', async () => {
       // arrange
       const studyUid = "1.2.3.4.5";
-      const body = {
-        updatableAttributes : [
-            {
-                "0008103E" :  {
-                    "vr": "LO",
-                    "Value": "New Series Description" 
-                }
+      const body = [
+        {
+            "0008103E" :  {
+                "vr": "LO",
+                "Value": "New Series Description" 
             }
-        ]
-      };
+        }
+      ];
 
       //act
       return http.patch(`studies/${studyUid}/normalizedmetadata`, body).then(async (result) => {
@@ -23,9 +21,10 @@ describe('Patch/Update Series', function () {
         // assert.deepEqual(newStudy, study);
       });
     });
-    it('should update the series instance uid', async function () { });
+    it('TODO: should update the series instance uid', async function () { });
+    it('TODO: should remove the series date and series time', async function () { });
   });
   describe('failure scenarios', function () {
-    it('should throw if patient does not exist', async function () { });
+    it('TODO: should throw if patient does not exist', async function () { });
   });
 });
