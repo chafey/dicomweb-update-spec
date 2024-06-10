@@ -14,7 +14,7 @@ describe('Replace Patient', function () {
       // birthdate
       patient[0]["00100030"] = { 
           "vr": "DA",
-          "Value": "DOE^JOHN" 
+          "Value": "19730211" 
       };
 
       //act
