@@ -1,11 +1,13 @@
 # dicomweb-update-spec
 Proposal for a set of APIs to support updating of DICOM instances via DICOMweb
 
-Status: Requesting feedback from community (Jun 6, 2024)
+Status: Requesting feedback from community (Jun 10, 2024) 
 
 ## Use Cases
 
 - Synchronize attributes shared with EHR/RIS (Patient name/id/gender/dob, study description, procedure code)
+  - Change patient name for all of a patients studies
+  - Change patient name for patient studies only after they were married (preserve maiden name in DICOM)
 - De-identify data
 - QC Workflows 
   - correct fat fingered data (patient name, patient id) so it will reconcile with the EHR/RIS
@@ -16,134 +18,37 @@ Status: Requesting feedback from community (Jun 6, 2024)
 - Modernize data (e.g. remove private attribute with custom annotations and create new presentation state instance with those annotations)
 - Changing the transfer syntax of stored sop instances (transcoding)
 
-
-
 ## APIs
-### Replace APIS
 
-- Replace all Patient Level Attributes - PUT to /patients/[id]/normalizedmetadata.
-  - Body is a [DICOM JSON Model](https://dicom.nema.org/medical/dicom/current/output/chtml/part18/chapter_E.html) of patient level attributes.  
-  - Patient level attributes are defined as those that belong to patient modules as defined by [PS3.3 C.7.1](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.html#sect_C.7.1)
-  - Will cause all instances to be updated that have the same PatientID
-  - Any patient level attribute can be set including PatientID
-  - Attempting to set other level attributes (Study/Series/Instance) will generate an error 
+### Normalized Metadata
 
-- Replace all Study Level Attributes - PUT to /studies/[id]/normalizedmetadata
-  - Body is a [DICOM JSON Model](https://dicom.nema.org/medical/dicom/current/output/chtml/part18/chapter_E.html) of study level attributes.  
-  - Study level attributes are those that belong to study modules as defined by [PS3.3 C.7.2](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.2.html)
-  - Will cause all instances to be updated that have the same StudyInstanceUid
-  - Any study level attribute can be set including StudyInstanceUID
-  - Study Instance UID can be changed
-  - Attempting to set other level attributes (Patient/Series/Instance) will generate an error 
+These APIs allow you to replace, update and get subsets of DICOM data.  The allowed subsets are the patient, study, series and
+instance level as defined by the DICOM standard in [PS3.3 C.7](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.html).  These would be used by most of the use cases listed at the top of this document.  All private attributes 
+are considered instance level attributes.  ETAG is used to detect and prevent update conflicts. 
 
-- Replace all Series Level Attributes - PUT to /studies/[id]/series/[id]/normalizedmetadata
-  - Body is a [DICOM JSON Model](https://dicom.nema.org/medical/dicom/current/output/chtml/part18/chapter_E.html) of series level attributes.  
-  - Series level attributes are those that belong to the series modules as defined by [PS 3.3 C.7.3](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.3.html)
-  - Will cause all instances to be updated that have the same SeriesUid and StudyUid
-  - SeriesUID can be changed
-  - Attempting to set other level attributes (Patient/Study/Instance) will generate an error 
+* [GET](docs/normalizedmetadata/get.md)
+* [PATCH (update)](docs/normalizedmetadata/patch.md)
+* [PUT (replace)](docs/normalizedmetadata/put.md)
 
-- Replace all SOP Instance Level Attributes - PUT to /studies/[id]/series/[id]/instances/[id]/nornalizedmetadata
-  - Body is a [DICOM JSON Model](https://dicom.nema.org/medical/dicom/current/output/chtml/part18/chapter_E.html) of instance level attributes.  
-  - Instance level attributes are those that do not belong to the patient, study or series level attributes as defined above
-  - Will cause the instances to be updated that has the same StudyInstanceUID, SeriesInstanceUid and SOPInstanceUID
-  - SOPInstanceUID can be changed
-  - TransferSyntaxUID can be changed if the server supports transcoding and this instance can be transcoded to the requested transfer syntax
-  - Attempting to set other level attributes (Patient/Study/Series) will generate an error 
+### Metadata
 
-### Update APIs
+This API allows you to update one or more instances in a study or series.  This can be useful for updating instance level attributes for multiple instances at a time (e.g. removing private attributes) 
 
-- Update Patient Level Attributes - PATCH to /patients/[id]/normalizedmetadata.
-  - Body is a [JSON document](docs/updateSchema.md) of patient level attributes to update and remove 
-  - Patient level attributes are defined as those that belong to patient modules as defined by [PS3.3 C.7.1](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.html#sect_C.7.1)
-  - Will cause all instances to be updated that have the same PatientID
-  - Any patient level attribute can be set including PatientID
-  - Attempting to set other level attributes (Study/Series/Instance) will generate an error 
+* [PATCH (update)](docs/metadata-update.md)
 
-- Update Study Level Attributes - PATCH to /studies/[id]/normalizedmetadata.
-  - Body is a [JSON document](docs/updateSchema.md) of study level attributes to update and remove 
-  - Study level attributes are those that belong to study modules as defined by [PS3.3 C.7.2](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.2.html)
-  - Will cause all instances to be updated that have the same Study Instance UID 
-  - Any study level attribute can be set including Study Instance UID 
-  - Study Instance UID can be changed
-  - Attempting to set other level attributes (Patient/Series/Instance) will generate an error 
+### Move
 
-- Update Series Level Attributes - PATCH to /studies/[id]/series/[id]/normalizedmetadata.
-  - Body is a [JSON document](docs/updateSchema.md) of instance level attributes to update and remove 
-  - Series level attributes are those that belong to the series modules as defined by [PS 3.3 C.7.3](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.3.html)
-  - Will cause all instances to be updated that have the same Study UID and Series UID 
-  - Any series level attribute can be set including Series UID 
-  - SeriesUID can be changed
-  - Attempting to set other level attributes (Patient/Study/Instance) will generate an error 
+These APIs allow you to "reparent" a study, series or instance.  This can be useful for merge/split use cases.  Note that
+the instances are not copied or cloned, they are moved.  After the move is complete, the instance are no longer available 
+via the prior resource paths. 
 
-- Update Instance Level Attributes - PATCH to /studies/[id]/series/[id]/instances/[id]/normalizedmetadata.
-  - Body is a [JSON document](docs/updateSchema.md) of instance level attributes to update and remove 
-  - Instance level attributes are those that do not belong to the patient, study or series level attributes as defined above
-  - Will cause the instance to be updated that has the same Study UID, Series UID, SOP InstanceUID 
-  - SOPInstanceUID can be changed
-  - TransferSyntaxUID can be changed if the server supports transcoding and this instance can be transcoded to the requested transfer syntax
-  - Attempting to set other level attributes (Patient/Study/Series) will generate an error 
+[Move APIs](docs/move.md)
 
-- Update all Study Instances - PATCH to /studies/[id]/metadata
-  - Body is an array of [JSON documents](docs/updateSchema.md) for each instance in the study of attributes to update and remove 
-  - All instance JSON documents shall have the same change for attributes at the patient/study/level.  An error is thrown otherwise
-  - PatientId can be changed
-  - Attempting to set Study UID, Series UID or SOP InstanceUID will generate an error 
+### Delete
 
-### Move APIs
+These APIs allow you to permanently delete a patient, study, series or instance
 
-- Move Study to a new or existing Patient - POST to /studies/[id]/move
-  - Body is a DICOM dataset of attributes 
-  - Body must include new PatientID
-  - Body may include a new Study Instance UID
-  - If patient does not exist, it will be created using attributes from the prior patient 
-
-- Move Series to a different patient and study - POST to /studies/[id]/series/[id]/move
-  - Body is a DICOM dataset of attributes 
-  - Body must include new patient id
-  - Body must include new study uid
-  - Body may include a new series uid
-  - If patient and study do not exist, they will be created using attributes from the prior patient/study
-
-- Move Instance to a new patient, study and series - POST to /studies/[id]/series/[id]/instances[id]/move
-  - Body is a DICOM dataset of attributes 
-  - Body must include new patient id
-  - Body must include new study uid
-  - Body must include new series uid
-  - Body may include a new sop instance uid
-  - If patient, study or series do not exist, they will be created using attribtues from the prior patient/study/series
- 
-### Delete APIs
-
-- Delete Patient - DELETE to /patients/[id]
-  - Deletes all instances with the PatientId
-
-- Delete Study - DELETE to /studies/[id]
-  - Deletes all instance for the specified study
-
-- Delete Series - DELETE to /studies/[id]/series/[id]
-  - Deletes all instance for the specified series.  
-
-- Delete Instance - DELETE to /studies/[id]/series/[id]/instances/[id]
-  - Deletes the specified instance
- 
-## Get APIs
-
-- Get Patient Attributes - GET to /patients/[id]/normalizedmetadata
-  - Body is a DICOM dataset of patient level attributes.  
-  - Patient level attributes are defined as those that belong to patient modules as defined by [PS3.3 C.7.1](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.html#sect_C.7.1)
-
-- Get Study Attributes - GET to /studies/[id]/normalizedmetadata
-  - Body is a DICOM dataset of study level attributes.  
-  - Study level attributes are those that belong to study modules as defined by [PS3.3 C.7.2](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.2.html)
-
-- Get Series Attributes - GET to /studies/[id]/series/[id]/nornalizedmetadata
-  - Body is a DICOM dataset of series level attributes
-  - Series level attributes are those that belong to the series modules as defined by [PS 3.3 C.7.3](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.3.html)
-
-- Get Instance Attributes - GET to /studies/[id]/series/[id]/instances/[id]/nornalizedmetadata
-  - Body is a DICOM dataset of instance level attributes 
-  - Instance level attributes are those that do not belong to the patient, study or series level attributes as defined above
+[Delete APIs](docs/delete.md)
 
 ## FAQ
 
@@ -151,10 +56,10 @@ Status: Requesting feedback from community (Jun 6, 2024)
     - A: The existing metadata endpoints return the metadata for all instances at that level (study, series) which can be very large (>10GB for large studies).  Most update/replace use cases only effect a few attributes so working with a smaller document is easier 
 
 - Q: How would you merge two patients?  
-    - A: Use Move Study to move all studies from patient A to patient B
+    - A: Use Move Study to move all studies from patient A to patient B.  See the unit test ["should move patient 2s images from patient 1s study (split use case). Assumes patient 2 already has a study in the db"](test/move-series.test.js)
 
 - Q: Is there a way to update attributes at different levels with a single atomic operation?
-    - A: Yes, use the PATCH to /studies/[id]
+    - A: Yes, use the PATCH to /studies/[id]/metadata
 
 - Q: Why did you break out patient attributes separate from study attributes?
     - A: One of the most common update operation is to synchronize patient level attributes with an external system (EHR/RIS).  The patients endpoint allows this change to be atomically for all studies associated with a single patient

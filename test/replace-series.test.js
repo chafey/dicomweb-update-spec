@@ -2,7 +2,7 @@
 var assert = require('assert');
 const http = require('./http')
 
-describe('Update Series', function () {
+describe('Replace Series', function () {
   describe('Happy Paths', function () {
     it('should update the series description', async function () {
       // arrange
