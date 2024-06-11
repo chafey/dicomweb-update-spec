@@ -37,8 +37,8 @@ are considered instance level attributes.  ETAG is used to detect and prevent up
 This API allows you to update one or more instances in a study or series.  This can be useful for updating instance level attributes for multiple instances at a time (e.g. removing private attributes) 
 
 * [PATCH (update)](docs/metadata-update.md)
-
-### Move
+ 
+ ### Move
 
 These APIs allow you to "reparent" a study, series or instance.  This can be useful for merge/split use cases.  Note that
 the instances are not copied or cloned, they are moved.  After the move is complete, the instance are no longer available 
@@ -61,7 +61,11 @@ These APIs allow you to permanently delete a patient, study, series or instance
     - A: Use Move Study to move all studies from patient A to patient B.  See the unit test ["should move patient 2s images from patient 1s study (split use case). Assumes patient 2 already has a study in the db"](test/move-series.test.js)
 
 - Q: Is there a way to update attributes at different levels with a single atomic operation?
-    - A: Yes, use the PATCH to /studies/[id]/metadata
+    - A: Yes, see the [Metadata Update/PATCH APIs](docs/metadata-update.md)
 
 - Q: Why did you break out patient attributes separate from study attributes?
     - A: One of the most common update operation is to synchronize patient level attributes with an external system (EHR/RIS).  The patients endpoint allows this change to be atomically for all studies associated with a single patient
+
+## TODO
+
+- Include the IssuerOfPatientId as part of the patient resource key somehow?

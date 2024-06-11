@@ -1,14 +1,40 @@
 Delete APIs
 -----------
 
-# Delete Patient - DELETE to /patients/[id]
-  - Deletes all instances with the PatientId
+# Delete Patient 
+  - HTTP Verb: DELETE 
+  - URI Template: /patients/[id]/normalizedmetadata
+  - Query Parameters:
+    - IssuerOfPatientId - optional - qualifies the patient further
+  - HTTP Headers:
+    - Request
+      - If-Match: String representing the version of the resource this patch is made against (Etag from GET)
+  - Behavior
+    - Deletes all instances with the specified PatientId
 
-# Delete Study - DELETE to /studies/[id]
-  - Deletes all instance for the specified study
+# Delete Study 
+  - HTTP Verb: DELETE 
+  - URI Template: /studies/[id]
+  - HTTP Headers:
+    - Request
+      - If-Match: String representing the version of the resource this patch is made against (Etag from GET)
+  - Behavior
+    - Deletes all instance for the specified study uid
 
 # Delete Series - DELETE to /studies/[id]/series/[id]
-  - Deletes all instance for the specified series.  
+  - HTTP Verb: DELETE 
+  - URI Template: /studies/[id]/series/[id]
+  - HTTP Headers:
+    - Request
+      - If-Match: String representing the version of the resource this patch is made against (Etag from GET)
+  - Behavior
+    - Deletes all instance for the specified study uid and series uid.  
 
-# Delete Instance - DELETE to /studies/[id]/series/[id]/instances/[id]
-  - Deletes the specified instance
+# Delete Instance 
+  - HTTP Verb: DELETE 
+  - URI Template: /studies/[id]/series/[id]/instances/[id]
+  - HTTP Headers:
+    - Request
+      - If-Match: String representing the version of the resource this patch is made against (Etag from GET)
+  - Behavior
+    - Deletes the specified instance
