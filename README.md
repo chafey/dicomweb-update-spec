@@ -20,6 +20,8 @@ Status: Requesting feedback from community (Jun 10, 2024)
 
 ## APIs
 
+All APIs will use standard HTTP status codes as defined by the [DICOM standard](https://dicom.nema.org/medical/dicom/current/output/chtml/part18/sect_8.5.html)
+
 ### Normalized Metadata
 
 These APIs allow you to replace, update and get subsets of DICOM data.  The allowed subsets are the patient, study, series and
