@@ -1,7 +1,8 @@
 # dicomweb-update-spec
 Proposal for a set of APIs to support updating of DICOM instances via DICOMweb
 
-Status: Requesting feedback from community (Jun 10, 2024) 
+Status: Requesting feedback from community
+Last Update: Jun 11, 2024 
 
 ## Use Cases
 
