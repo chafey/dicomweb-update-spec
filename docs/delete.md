@@ -3,7 +3,7 @@ Delete APIs
 
 # Delete Patient 
   - HTTP Verb: DELETE 
-  - URI Template: /patients/[id]/normalizedmetadata
+  - URI Template: /patients/[id]
   - Query Parameters:
     - IssuerOfPatientId - optional - qualifies the patient further
   - HTTP Headers:
@@ -21,7 +21,7 @@ Delete APIs
   - Behavior
     - Deletes all instance for the specified study uid
 
-# Delete Series - DELETE to /studies/[id]/series/[id]
+# Delete Series 
   - HTTP Verb: DELETE 
   - URI Template: /studies/[id]/series/[id]
   - HTTP Headers:

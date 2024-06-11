@@ -55,7 +55,7 @@ Replace APIS
     - SeriesUID can be changed
     - Attempting to set other level attributes (Patient/Study/Instance) will generate an error 
 
-# Replace all SOP Instance Level Attributes - PUT to /studies/[id]/series/[id]/instances/[id]/nornalizedmetadata
+# Replace all SOP Instance Level Attributes 
   - HTTP Verb: PUT
   - URI Template: /studies/[id]/series/[id]/instances/[id]/normalizedmetadata
   - HTTP Headers:

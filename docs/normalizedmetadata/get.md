@@ -33,7 +33,7 @@ Get APIs
     - 200 (Success) - Body includes the patient resource in JSON
     - 404 (Not Found) - Patient resource does not exist
 
-# Get Series Attributes - GET to /studies/[id]/series/[id]/nornalizedmetadata
+# Get Series Attributes 
   - HTTP Verb: GET
   - URI Template: /studies/[id]/series/[id]/normalizedmetadata
   - HTTP Headers:
@@ -48,7 +48,7 @@ Get APIs
     - 200 (Success) - Body includes the instance resource in JSON
     - 404 (Not Found) - Patient resource does not exist
 
-# Get Instance Attributes - GET to /studies/[id]/series/[id]/instances/[id]/nornalizedmetadata
+# Get Instance Attributes 
   - HTTP Verb: GET
   - URI Template: /studies/[id]/series/[id]/instances/normalizedmetadata
   - HTTP Headers:
