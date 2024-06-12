@@ -23,6 +23,8 @@ Last Update: Jun 11, 2024
 
 All APIs will use standard HTTP status codes as defined by the [DICOM standard](https://dicom.nema.org/medical/dicom/current/output/chtml/part18/sect_8.5.html)
 
+For systems that do not enforce unique identifiers (e.g. PatientID, StudyUID, SeriesUID, SOPInstanceUID) additional attributes may be passed using [DICOM specific custom HTTP Headers](docs/custom-headers.md).
+
 ### Normalized Metadata
 
 These APIs allow you to replace, update and get subsets of DICOM data.  The allowed subsets are the patient, study, series and
@@ -56,7 +58,9 @@ These APIs allow you to permanently delete a patient, study, series or instance
 ## FAQ
 
 - Q: Why did you introduce a normalizedmetadata endpoint?
-    - A: The existing metadata endpoints return the metadata for all instances at that level (study, series) which can be very large (>10GB for large studies).  Most update/replace use cases only effect a few attributes so working with a smaller document is easier 
+    - A: The existing metadata endpoints return all metadata for all instances at that level (study, series) which can be very large (>10GB for large studies).  Each instance returned has patient/study/series attributes which may not be consistent. 
+    Most update/replace use cases only effect a few attributes so working with a smaller document is easier and avoids conflicts
+    related to shared data at the patient/study/series levels.
 
 - Q: How would you merge two patients?  
     - A: Use Move Study to move all studies from patient A to patient B.  See the unit test ["should move patient 2s images from patient 1s study (split use case). Assumes patient 2 already has a study in the db"](test/move-series.test.js)
@@ -65,7 +69,9 @@ These APIs allow you to permanently delete a patient, study, series or instance
     - A: Yes, see the [Metadata Update/PATCH APIs](docs/metadata-update.md)
 
 - Q: Why did you break out patient attributes separate from study attributes?
-    - A: One of the most common update operation is to synchronize patient level attributes with an external system (EHR/RIS).  The patients endpoint allows this change to be atomically for all studies associated with a single patient
+    - A: One of the most common update operation is to synchronize patient level attributes with an external system (EHR/RIS).  The patients endpoint allows this change to be atomically for all studies associated with a single patient.  Since a patient could 
+    have 100's of studies, it is more efficient to have one operation that updates all studies for a patient than requiring the
+    client to make calls for each study.  It also ensures consistency of patient data between all of the patients studies
 
 ## TODO
 

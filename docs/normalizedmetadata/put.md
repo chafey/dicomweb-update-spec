@@ -4,8 +4,6 @@ Replace APIS
 # Replace all Patient Level Attributes 
   - HTTP Verb: PUT
   - URI Template: /patients/[id]/normalizedmetadata
-  - Query Parameters:
-    - IssuerOfPatientId - optional - qualifies the patient further
   - HTTP Headers:
     - Request
       - Accept: application/json

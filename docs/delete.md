@@ -4,8 +4,6 @@ Delete APIs
 # Delete Patient 
   - HTTP Verb: DELETE 
   - URI Template: /patients/[id]
-  - Query Parameters:
-    - IssuerOfPatientId - optional - qualifies the patient further
   - HTTP Headers:
     - Request
       - If-Match: String representing the version of the resource this patch is made against (Etag from GET)

@@ -4,8 +4,6 @@ Get APIs
 # Get Patient Attributes 
   - HTTP Verb: GET
   - URI Template: /patients/[id]/normalizedmetadata
-  - Query Parameters:
-    - IssuerOfPatientId - optional - qualifies the patient further
   - HTTP Headers:
     - Request
       - Accept: application/json
