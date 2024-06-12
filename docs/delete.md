@@ -7,6 +7,8 @@ Delete APIs
   - HTTP Headers:
     - Request
       - If-Match: String representing the version of the resource this patch is made against (Etag from GET)
+      - DICOMIssuerPatientID: Optional parameter to further qualify the study 
+      - DICOMPatientName: Optional parameter to further qualify the study 
   - Behavior
     - Deletes all instances with the specified PatientId
 
@@ -16,6 +18,9 @@ Delete APIs
   - HTTP Headers:
     - Request
       - If-Match: String representing the version of the resource this patch is made against (Etag from GET)
+      - DICOMPatientID: Optional parameter to further qualify the study 
+      - DICOMIssuerPatientID: Optional parameter to further qualify the study 
+      - DICOMPatientName: Optional parameter to further qualify the study 
   - Behavior
     - Deletes all instance for the specified study uid
 
@@ -25,6 +30,9 @@ Delete APIs
   - HTTP Headers:
     - Request
       - If-Match: String representing the version of the resource this patch is made against (Etag from GET)
+      - DICOMPatientID: Optional parameter to further qualify the study 
+      - DICOMIssuerPatientID: Optional parameter to further qualify the study 
+      - DICOMPatientName: Optional parameter to further qualify the study 
   - Behavior
     - Deletes all instance for the specified study uid and series uid.  
 
@@ -34,5 +42,8 @@ Delete APIs
   - HTTP Headers:
     - Request
       - If-Match: String representing the version of the resource this patch is made against (Etag from GET)
+      - DICOMPatientID: Optional parameter to further qualify the study 
+      - DICOMIssuerPatientID: Optional parameter to further qualify the study 
+      - DICOMPatientName: Optional parameter to further qualify the study 
   - Behavior
     - Deletes the specified instance

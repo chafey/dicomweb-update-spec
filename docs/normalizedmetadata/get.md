@@ -7,6 +7,8 @@ Get APIs
   - HTTP Headers:
     - Request
       - Accept: application/json
+      - DICOMIssuerPatientID: Optional parameter to further qualify the study 
+      - DICOMPatientName: Optional parameter to further qualify the study 
     - Response
       - Content-Type: application/json
       - Etag: string that uniquely identifies this version of the resource 
@@ -22,6 +24,9 @@ Get APIs
   - HTTP Headers:
     - Request
       - Accept: application/json
+      - DICOMPatientID: Optional parameter to further qualify the study 
+      - DICOMIssuerPatientID: Optional parameter to further qualify the study 
+      - DICOMPatientName: Optional parameter to further qualify the study 
     - Response
       - Content-Type: application/json
       - Etag: string that uniquely identifies this version of the resource 
@@ -37,6 +42,9 @@ Get APIs
   - HTTP Headers:
     - Request
       - Accept: application/json
+      - DICOMPatientID: Optional parameter to further qualify the study 
+      - DICOMIssuerPatientID: Optional parameter to further qualify the study 
+      - DICOMPatientName: Optional parameter to further qualify the study 
     - Response
       - Content-Type: application/json
       - Etag: string that uniquely identifies this version of the resource 
@@ -52,6 +60,9 @@ Get APIs
   - HTTP Headers:
     - Request
       - Accept: application/json
+      - DICOMPatientID: Optional parameter to further qualify the study 
+      - DICOMIssuerPatientID: Optional parameter to further qualify the study 
+      - DICOMPatientName: Optional parameter to further qualify the study 
     - Response
       - Content-Type: application/json
       - Etag: string that uniquely identifies this version of the resource 

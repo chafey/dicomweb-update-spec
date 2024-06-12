@@ -10,6 +10,9 @@ Patch documents will be comply with [RFC 7396](https://www.rfc-editor.org/rfc/rf
     - Request
       - Accept: application/json
       - If-Match: String representing the version of the resource this patch is made against (Etag from GET)
+      - DICOMPatientID: Optional parameter to further qualify the study 
+      - DICOMIssuerPatientID: Optional parameter to further qualify the study 
+      - DICOMPatientName: Optional parameter to further qualify the study 
     - Response
       - Content-Type: application/json
       - Etag: string that uniquely identifies the updated version of the resource 
@@ -28,6 +31,9 @@ Patch documents will be comply with [RFC 7396](https://www.rfc-editor.org/rfc/rf
     - Request
       - Accept: application/json
       - If-Match: String representing the version of the resource this patch is made against (Etag from GET)
+      - DICOMPatientID: Optional parameter to further qualify the study 
+      - DICOMIssuerPatientID: Optional parameter to further qualify the study 
+      - DICOMPatientName: Optional parameter to further qualify the study 
     - Response
       - Content-Type: application/json
       - Etag: string that uniquely identifies the updated version of the resource 
@@ -44,6 +50,9 @@ Patch documents will be comply with [RFC 7396](https://www.rfc-editor.org/rfc/rf
     - Request
       - Accept: application/json
       - If-Match: String representing the version of the resource this patch is made against (Etag from GET)
+      - DICOMPatientID: Optional parameter to further qualify the study 
+      - DICOMIssuerPatientID: Optional parameter to further qualify the study 
+      - DICOMPatientName: Optional parameter to further qualify the study 
     - Response
       - Content-Type: application/json
       - Etag: string that uniquely identifies the updated version of the resource 
